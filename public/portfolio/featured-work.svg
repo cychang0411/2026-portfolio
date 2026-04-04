@@ -1,0 +1,59 @@
+<svg width="1600" height="1600" viewBox="0 0 1600 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1600" fill="#050608"/>
+  <rect width="1600" height="1600" fill="url(#bg)"/>
+  <g opacity="0.3">
+    <circle cx="800" cy="810" r="620" stroke="url(#rings)" stroke-width="2"/>
+    <circle cx="800" cy="810" r="540" stroke="url(#rings)" stroke-width="2"/>
+    <circle cx="800" cy="810" r="460" stroke="url(#rings)" stroke-width="2"/>
+    <circle cx="800" cy="810" r="380" stroke="url(#rings)" stroke-width="2"/>
+  </g>
+  <g filter="url(#shadow)">
+    <ellipse cx="802" cy="1288" rx="326" ry="92" fill="#17181C"/>
+    <ellipse cx="802" cy="1208" rx="280" ry="62" fill="url(#stoneLight)"/>
+    <rect x="520" y="602" width="564" height="626" rx="32" fill="url(#stone)"/>
+    <ellipse cx="802" cy="602" rx="282" ry="80" fill="url(#stoneTop)"/>
+    <ellipse cx="802" cy="522" rx="228" ry="64" fill="url(#stoneLight)"/>
+    <rect x="574" y="436" width="456" height="150" rx="28" fill="url(#stone)"/>
+    <ellipse cx="802" cy="436" rx="228" ry="64" fill="url(#stoneTop)"/>
+    <path d="M654 750H735L676 1016H608L654 750Z" fill="#232428" opacity="0.78"/>
+    <path d="M760 728H844V810H799V1016H735V922H760V728Z" fill="#222329" opacity="0.8"/>
+    <path d="M874 730H948L1010 1016H942L926 956H862L846 1016H780L874 730ZM919 902L895 814L871 902H919Z" fill="#222329" opacity="0.8"/>
+    <path d="M612 1080H1006" stroke="#292B31" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(800 820) rotate(90) scale(820)">
+      <stop offset="0" stop-color="#111217"/>
+      <stop offset="0.62" stop-color="#090A0D"/>
+      <stop offset="1" stop-color="#030406"/>
+    </radialGradient>
+    <linearGradient id="stone" x1="574" y1="436" x2="1084" y2="1288" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#65676D"/>
+      <stop offset="0.28" stop-color="#404248"/>
+      <stop offset="0.62" stop-color="#2C2E33"/>
+      <stop offset="1" stop-color="#52545A"/>
+    </linearGradient>
+    <linearGradient id="stoneTop" x1="574" y1="436" x2="1030" y2="522" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7E8188"/>
+      <stop offset="1" stop-color="#4B4D54"/>
+    </linearGradient>
+    <linearGradient id="stoneLight" x1="522" y1="522" x2="1082" y2="1244" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7F828A"/>
+      <stop offset="0.4" stop-color="#565960"/>
+      <stop offset="1" stop-color="#2A2C31"/>
+    </linearGradient>
+    <linearGradient id="rings" x1="180" y1="190" x2="1450" y2="1450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F2126"/>
+      <stop offset="1" stop-color="#0C0D10"/>
+    </linearGradient>
+    <filter id="shadow" x="430" y="380" width="744" height="1032" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="36"/>
+      <feGaussianBlur stdDeviation="26"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.45 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
+    </filter>
+  </defs>
+</svg>
