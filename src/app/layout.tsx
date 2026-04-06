@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Manrope, Geist } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import { CustomCursor } from "@/components/portfolio/custom-cursor";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const manrope = Manrope({
-  variable: "--font-manrope",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -29,9 +28,12 @@ export default function RootLayout({
   return (
     <html
       lang="zh-Hans"
-      className={cn("h-full", "antialiased", manrope.variable, geistMono.variable, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", inter.variable, geistMono.variable, "font-sans")}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+/public/playground/*.mov
+/public/playground/*.mp4
 
 # production
 /build

@@ -66,11 +66,11 @@ export type PortfolioContent = {
   stack: string[];
   now: string[];
   photos: PhotoItem[];
+  catPhotos: PhotoItem[];
   socialLinks: SocialItem[];
   footerLinks: SocialItem[];
   resume: {
     label: string;
-    helper: string;
     href: string;
   };
   contact: {
@@ -82,6 +82,72 @@ export type PortfolioContent = {
     mailBody: string;
   };
 };
+
+const driveLifePhotoIds = [
+  "17_SvBxF0ynPe1Vg17DT2EDzcLj5eDw5N",
+  "1A4pu6rzR78qEpOUAUr-ZzwvMFTc7VODQ",
+  "1EmHR9eoDsU3Gk91t1MyvSAO226GZ_nN8",
+  "1FVConlh98220QZ3BK_Cu5TVTu9AqXoM2",
+  "1GogM6RVv4xAPeVPNkqqentzviqz-5l4B",
+  "1NIM_Ze31ybz-P5b_mrQ8Iy9pwnKjmCOz",
+  "1RrIhoKrNMDdMi3XyGUV66tJd-P4Nd_lM",
+  "1YxOnL1PHITmLAQ_P4pzXGbdB6PXDxLqY",
+  "1cCXc4D3fzSK4-B73uUgRdYk0CrPg-jgA",
+  "1gzsaMhqDV8yp6MkWLLiM6Snm_3dCwUCB",
+  "1hr7iRnNXClBMfh69vH7AvJAxI-t16tem",
+  "1nAA6MN4GU5la_MN6PdvjCnSRwLraeK42",
+  "1pVYidWs53OiWDvrqmqKNclQqfc73ARxq",
+  "1pZ9JaBL21Av3vyNcfwaygbKlX64_lbIR",
+  "1qVWp4HE1Je1xwc4sdZpfDYWtOON25k-S",
+  "1qwCvrS6bqrFmZyuP4jm9Oh6VJ9OUM2Oo",
+  "1qxiieNEf-94jJeGQkWUpAYyh3p1bpbRS",
+  "1sCtJdRBG9FzHCFlyS_H1z5MQ5dTMwCcM",
+  "1v2myC5_w-NeG5of48vAn2c1KEvpxO4WJ",
+  "1vEHVnme9WRd5w6dc4Rl9Z4oSEi69BfaA",
+  "1vuTRovmWbVnx-FeNxniEJ_iQOitr5EnF",
+  "1ym1LseTLnWVz251BHjzsx7IxzSrJXuQS",
+] as const;
+
+const drivePhotoSrc = (id: string) =>
+  `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
+
+const lifePhotos: PhotoItem[] = driveLifePhotoIds.map((id, index) => {
+  const order = String(index + 1).padStart(2, "0");
+
+  return {
+    src: drivePhotoSrc(id),
+    alt: {
+      zh: `生活攝影輪播照片 ${order}`,
+      en: `Life photo ${order}.`,
+    },
+  };
+});
+
+const driveCatPhotoIds = [
+  "15pj0h5OZli64sE0qsoHCFR_0RjRRq3QI",
+  "19CsO_kqBQdA4kPKQzlFnd9Tf2AQeM-n3",
+  "1FhpciCldpQ_WaGYUu_oApEop72dTUyL1",
+  "1Gz7ivZ68zdcJxCCF0pWFbMA9m7Tj2O-5",
+  "1QGbffZ3pJJia4xSkesJ9M0hT5323ke2R",
+  "1SU_Ai1N357TVmimhMFUJqwEHMbMx42bR",
+  "1TmcRj_StGa7eUjUivZF1uhcXP7u4-wiV",
+  "1fKJfV3NRXgLcT0n8lfh5oci9Tk25EvS6",
+  "1ke-8Rk5h7nHhv6ehWTu0SXV1Ji4OO7Cw",
+  "1uhpdjDnCMiM7Z4hsVovKjmrdHyNiWZqH",
+  "1zObgcnn0CuBoDnT6yffSz1pzmoY0RygZ",
+] as const;
+
+const catPhotos: PhotoItem[] = driveCatPhotoIds.map((id, index) => {
+  const order = String(index + 1).padStart(2, "0");
+
+  return {
+    src: drivePhotoSrc(id),
+    alt: {
+      zh: `貓咪輪播照片 ${order}`,
+      en: `Cat photo ${order}.`,
+    },
+  };
+});
 
 export const portfolioContent: Record<Locale, PortfolioContent> = {
   zh: {
@@ -104,7 +170,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       interests: "興趣愛好",
       dailyFrames: "日常照片",
       socials: "社交媒體",
-      resume: "履歷",
+      resume: "简历",
       contact: "聯繫方式",
       email: "Email",
       language: "語言",
@@ -119,7 +185,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     },
     workProjects: [
       {
-        title: "Fintech Onboarding Redesign",
+        title: "Bonfire OS 7.0",
         description: "重新梳理註冊流程與資訊優先級，讓新手更快理解產品價值。",
         href: "https://example.com/fintech-onboarding",
         meta: "Product Design · 2024",
@@ -172,57 +238,35 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     interests: ["城市散步", "展覽與空間", "產品敘事", "攝影", "AI 工具", "咖啡與器物"],
     stack: ["Figma", "Stitch", "Claude", "Codex"],
     now: ["AI-native 產品體驗", "更克制的動態語言", "把設計系統做得更有人味"],
-    photos: [
-      {
-        src: "/photos/daily-01.svg",
-        alt: {
-          zh: "暖色光線灑進室內的日常片段",
-          en: "A warm interior frame with afternoon light.",
-        },
-      },
-      {
-        src: "/photos/daily-02.svg",
-        alt: {
-          zh: "城市與建築之間的安靜街角",
-          en: "A quiet city corner between architecture and shadow.",
-        },
-      },
-      {
-        src: "/photos/daily-03.svg",
-        alt: {
-          zh: "帶有柔和天空色調的城市視角",
-          en: "A city view washed in a soft sky palette.",
-        },
-      },
-      {
-        src: "/photos/daily-04.svg",
-        alt: {
-          zh: "桌面、器物與工作節奏的細節",
-          en: "Desk objects and a slower working rhythm.",
-        },
-      },
-    ],
+    photos: lifePhotos,
+    catPhotos,
     socialLinks: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile" },
-      { label: "Threads", href: "https://www.threads.net/@your-profile" },
-      { label: "Medium", href: "https://medium.com/@your-profile" },
-      { label: "Dribbble", href: "https://dribbble.com/your-profile" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/vicky-chang-926a38207/" },
+      { label: "Medium", href: "https://medium.com/@vickychang_" },
+      {
+        label: "Threads",
+        href: "https://www.threads.com/@cychangyy_?igshid=NTc4MTIwNjQ2YQ==",
+      },
+      { label: "Email", href: "mailto:yaya810411@gmail.com" },
     ],
     footerLinks: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile" },
-      { label: "Twitter", href: "https://twitter.com/your-profile" },
-      { label: "Dribbble", href: "https://dribbble.com/your-profile" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/vicky-chang-926a38207/" },
+      { label: "Medium", href: "https://medium.com/@vickychang_" },
+      {
+        label: "Threads",
+        href: "https://www.threads.com/@cychangyy_?igshid=NTc4MTIwNjQ2YQ==",
+      },
+      { label: "Email", href: "mailto:yaya810411@gmail.com" },
     ],
     resume: {
       label: "下載履歷",
-      helper: "目前放的是 placeholder 檔案，之後可直接替換成正式 PDF。",
-      href: "/resume/vicky-chang_resume_placeholder.txt",
+      href: "https://drive.google.com/file/d/1G9on9D9zSpRu1vza67IQX7g9DH3HwsEU/view?usp=sharing",
     },
     contact: {
       title: "一起做更有質感的產品",
       description:
         "如果你正在找 UX/UI 設計、設計系統整理，或想一起探索 AI 與產品體驗的交會，歡迎來信。",
-      email: "hello@vickychang.design",
+      email: "yaya810411@gmail.com",
       cta: "發送 Email",
       mailSubject: "一起聊聊設計合作",
       mailBody:
@@ -264,7 +308,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     },
     workProjects: [
       {
-        title: "Fintech Onboarding Redesign",
+        title: "Bonfire OS 7.0",
         description: "A clearer signup journey with stronger information hierarchy and earlier value recognition.",
         href: "https://example.com/fintech-onboarding",
         meta: "Product Design · 2024",
@@ -317,57 +361,35 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     interests: ["City walks", "Exhibitions & spaces", "Product storytelling", "Photography", "AI tools", "Coffee & objects"],
     stack: ["Figma", "Stitch", "Claude", "Codex"],
     now: ["AI-native product experiences", "More restrained motion language", "Making design systems feel more human"],
-    photos: [
-      {
-        src: "/photos/daily-01.svg",
-        alt: {
-          zh: "暖色光線灑進室內的日常片段",
-          en: "A warm interior frame with afternoon light.",
-        },
-      },
-      {
-        src: "/photos/daily-02.svg",
-        alt: {
-          zh: "城市與建築之間的安靜街角",
-          en: "A quiet city corner between architecture and shadow.",
-        },
-      },
-      {
-        src: "/photos/daily-03.svg",
-        alt: {
-          zh: "帶有柔和天空色調的城市視角",
-          en: "A city view washed in a soft sky palette.",
-        },
-      },
-      {
-        src: "/photos/daily-04.svg",
-        alt: {
-          zh: "桌面、器物與工作節奏的細節",
-          en: "Desk objects and a slower working rhythm.",
-        },
-      },
-    ],
+    photos: lifePhotos,
+    catPhotos,
     socialLinks: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile" },
-      { label: "Threads", href: "https://www.threads.net/@your-profile" },
-      { label: "Medium", href: "https://medium.com/@your-profile" },
-      { label: "Dribbble", href: "https://dribbble.com/your-profile" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/vicky-chang-926a38207/" },
+      { label: "Medium", href: "https://medium.com/@vickychang_" },
+      {
+        label: "Threads",
+        href: "https://www.threads.com/@cychangyy_?igshid=NTc4MTIwNjQ2YQ==",
+      },
+      { label: "Email", href: "mailto:yaya810411@gmail.com" },
     ],
     footerLinks: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile" },
-      { label: "Twitter", href: "https://twitter.com/your-profile" },
-      { label: "Dribbble", href: "https://dribbble.com/your-profile" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/vicky-chang-926a38207/" },
+      { label: "Medium", href: "https://medium.com/@vickychang_" },
+      {
+        label: "Threads",
+        href: "https://www.threads.com/@cychangyy_?igshid=NTc4MTIwNjQ2YQ==",
+      },
+      { label: "Email", href: "mailto:yaya810411@gmail.com" },
     ],
     resume: {
       label: "Download resume",
-      helper: "This is a placeholder file for now. Replace it with your final PDF later.",
-      href: "/resume/vicky-chang_resume_placeholder.txt",
+      href: "https://drive.google.com/file/d/1bHis9j7BDvVEYxCi2XHC1VmhGDpTqShL/view?usp=sharing",
     },
     contact: {
       title: "Let’s shape a more thoughtful product",
       description:
         "If you are looking for UX/UI design, design system support, or someone to explore the overlap between AI and product experience with, I would love to hear from you.",
-      email: "hello@vickychang.design",
+      email: "yaya810411@gmail.com",
       cta: "Send email",
       mailSubject: "Let's talk about a design collaboration",
       mailBody:
