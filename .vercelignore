@@ -2,4 +2,3 @@
 .next
 node_modules
 public/playground/*.mov
-public/playground/*.mp4
