@@ -76,13 +76,13 @@ export function PhotoCarousel({
     }
 
     let cancelled = false;
-    const indicesToPreload = Array.from(
-      new Set([
-        currentIndex,
-        (currentIndex + 1) % photos.length,
-        (currentIndex - 1 + photos.length) % photos.length,
-      ]),
-    );
+    const currentPhoto = photos[currentIndex];
+
+    if (!currentPhoto || !currentPhoto.src.startsWith("/")) {
+      return;
+    }
+
+    const indicesToPreload = Array.from(new Set([currentIndex, (currentIndex + 1) % photos.length]));
 
     indicesToPreload.forEach((index) => {
       const photo = photos[index];
@@ -196,9 +196,13 @@ export function PhotoCarousel({
                   src={photo.src}
                   alt={photo.alt[locale]}
                   fill
-                  sizes={fillContainer ? "(max-width: 1024px) 100vw, 20vw" : "100vw"}
+                  sizes={
+                    fillContainer
+                      ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 22vw"
+                      : "(max-width: 768px) 100vw, (max-width: 1280px) 56vw, 38vw"
+                  }
                   priority={isPriorityImage}
-                  loading={isPriorityImage ? undefined : isActive ? "eager" : "lazy"}
+                  loading={isPriorityImage ? undefined : "lazy"}
                   onLoad={() => handleImageLoaded(photo.src, index)}
                   className={`object-cover will-change-transform transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     isActive ? "opacity-100" : "opacity-0"

@@ -325,7 +325,9 @@ function ProjectCard({
                 src={backgroundImageSrc}
                 alt={backgroundImageAlt}
                 fill
-                sizes="(max-width: 1024px) 100vw, 20vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 24vw"
+                loading="lazy"
+                quality={72}
                 className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.08]"
               />
             </div>
@@ -588,7 +590,7 @@ export function PortfolioPage() {
             icon={<Cube size={18} weight="fill" />}
             href="https://vickys-cool-portfolio.webflow.io/bonfire-os-7-0"
             className="lg:col-start-3 lg:row-start-2"
-            backgroundImageSrc="/portfolio/bonfire-os7-cover16.png"
+            backgroundImageSrc="/portfolio/optimized/bonfire-os7-cover16.jpg"
             backgroundImageAlt="Bonfire OS 7.0 project cover"
             hideTopIcon
             hideTopAction
@@ -603,7 +605,7 @@ export function PortfolioPage() {
             icon={<DeviceMobile size={18} weight="fill" />}
             href="https://vickys-cool-portfolio.webflow.io/design-simppl"
             className="lg:col-start-4 lg:row-start-2"
-            backgroundImageSrc="/portfolio/simppl-cover2.png"
+            backgroundImageSrc="/portfolio/optimized/simppl-cover2.jpg"
             backgroundImageAlt="Simppl mobile app project cover"
             hideTopIcon
             hideTopAction
@@ -619,7 +621,7 @@ export function PortfolioPage() {
             icon={<PaintBrush size={18} weight="fill" />}
             href="https://vickys-cool-portfolio.webflow.io/design-cartify"
             className="lg:col-start-5 lg:row-start-2"
-            backgroundImageSrc="/portfolio/cartify-cover3.png"
+            backgroundImageSrc="/portfolio/optimized/cartify-cover3.jpg"
             backgroundImageAlt="Cartify project cover"
             hideTopIcon
             hideTopAction
