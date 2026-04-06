@@ -235,16 +235,12 @@ function SocialButton({
       target={isExternalLink ? "_blank" : undefined}
       rel={isExternalLink ? "noreferrer" : undefined}
       aria-label={label}
-      title={label}
       className={`group/social relative flex items-center justify-center transition-all duration-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/85 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f93b38] ${
         filled
           ? "bg-[#FEF0EC] text-[#F25430] hover:bg-[#F25430] hover:text-white"
           : "border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white hover:text-[#f93b38]"
       } ${className}`}
     >
-      <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#f25430] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.12)] transition-all duration-200 group-hover/social:-translate-y-1 group-hover/social:opacity-100">
-        {label}
-      </span>
       <span
         className={`transition-transform duration-300 group-hover/social:scale-110 ${
           filled ? "text-current" : "text-white group-hover/social:text-[#f93b38]"
