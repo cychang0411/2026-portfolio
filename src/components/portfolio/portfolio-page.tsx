@@ -612,7 +612,7 @@ export function PortfolioPage() {
           <ProjectCard
             index="Project 03"
             title="Cartify"
-            subtitle={language === "zh" ? "網頁插件" : "Web Plugin"}
+            subtitle={language === "zh" ? "网页插件" : "Web Plugin"}
             language={language}
             icon={<PaintBrush size={18} weight="fill" />}
             href="https://vickys-cool-portfolio.webflow.io/design-cartify"
@@ -721,7 +721,7 @@ export function PortfolioPage() {
               className="relative grid h-[calc(100dvh-1.5rem)] w-full max-w-[1440px] overflow-y-auto rounded-[32px] bg-[#17120f] text-white shadow-[0_20px_90px_rgba(0,0,0,0.32)] md:h-[calc(100dvh-3rem)] lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,22.5rem)]"
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="relative flex min-h-[52vh] items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,rgba(249,59,56,0.16),transparent_40%),linear-gradient(180deg,#241b16_0%,#110d0b_100%)] px-4 py-6 md:px-8 md:py-10">
+              <div className="relative flex min-h-[clamp(15.5rem,40vh,20rem)] items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,rgba(249,59,56,0.16),transparent_40%),linear-gradient(180deg,#241b16_0%,#110d0b_100%)] px-4 py-[clamp(0.75rem,2vh,1rem)] md:min-h-[52vh] md:px-8 md:py-10">
                 <div className="aspect-video w-full overflow-hidden rounded-[24px]">
                   <video
                     key={activePlaygroundProject.videoSrc}
