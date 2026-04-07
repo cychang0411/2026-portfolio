@@ -36,7 +36,7 @@ const homeIslandStyles = `<style>
   border: 1px solid rgba(242, 84, 48, 0.22);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 14px 28px rgba(249, 59, 56, 0.1);
+  box-shadow: none;
   backdrop-filter: blur(12px) saturate(145%);
   -webkit-backdrop-filter: blur(12px) saturate(145%);
   transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
@@ -47,7 +47,7 @@ const homeIslandStyles = `<style>
   transform: translateY(-1px) scale(1.015);
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(242, 84, 48, 0.32);
-  box-shadow: 0 18px 36px rgba(249, 59, 56, 0.14);
+  box-shadow: none;
 }
 
 .portfolio-home-island:focus-visible {
@@ -84,6 +84,7 @@ const homeIslandStyles = `<style>
   background-image: none !important;
   border: 1.5px solid #f25430 !important;
   color: #f25430 !important;
+  opacity: 1 !important;
 }
 
 .go-up-button::before {
@@ -100,7 +101,7 @@ const homeIslandStyles = `<style>
 @media screen and (max-width: 767px) {
   .portfolio-home-island {
     top: auto;
-    bottom: max(20px, env(safe-area-inset-bottom));
+    bottom: max(12px, env(safe-area-inset-bottom));
   }
 
   .portfolio-home-island.is-hidden {
@@ -125,6 +126,18 @@ const homeIslandStyles = `<style>
   .go-up-button::before {
     width: 11px;
     height: 11px;
+  }
+
+  .work-hero.case-two {
+    background-image: url('/webflow/images/Bonchat_Concentric_Cover-mobile.webp') !important;
+  }
+
+  .work-hero.case-three {
+    background-image: url('/webflow/images/Simppl-mobile.webp') !important;
+  }
+
+  .work-hero.case-one {
+    background-image: url('/webflow/images/Cartify-BG-mobile.webp') !important;
   }
 }
 </style>`;
@@ -152,6 +165,21 @@ export async function serveWebflowPage(
   for (const [from, to] of [...baseReplacements, ...extraReplacements]) {
     html = html.replaceAll(from, to);
   }
+
+  html = html
+    .replaceAll('<link href="https://fonts.googleapis.com" rel="preconnect">', "")
+    .replaceAll(
+      '<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">',
+      "",
+    )
+    .replaceAll(
+      '<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>',
+      "",
+    )
+    .replaceAll(
+      '<script type="text/javascript">WebFont.load({  google: {    families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"]  }});</script>',
+      "",
+    );
 
   html = html.replace("</head>", `${homeIslandStyles}</head>`);
   html = html.replace("<body", '<body id="page-top"');
