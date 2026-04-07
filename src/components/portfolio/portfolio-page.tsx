@@ -918,8 +918,6 @@ export function PortfolioPage() {
             cubic-bezier(0.22, 1, 0.36, 1) forwards;
           animation-delay: var(--intro-delay, 0ms);
           will-change: transform, opacity;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
         }
 
         .project-card-caption {
@@ -1004,17 +1002,6 @@ export function PortfolioPage() {
           }
         }
 
-        @keyframes portfolio-card-reveal-mobile {
-          0% {
-            opacity: 0;
-            transform: translateY(var(--intro-y, -72px));
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
         @media (prefers-reduced-motion: reduce) {
           .portfolio-intro-item {
             opacity: 1;
@@ -1033,13 +1020,8 @@ export function PortfolioPage() {
           .portfolio-intro-item {
             --intro-x: 0px !important;
             --intro-y: -72px !important;
-            transform: translateY(var(--intro-y, -72px)) !important;
-            animation-name: portfolio-card-reveal-mobile !important;
             animation-duration: 1760ms !important;
-            animation-timing-function: ease-out !important;
             animation-delay: calc(var(--intro-index, 0) * 120ms) !important;
-            animation-fill-mode: both !important;
-            will-change: transform, opacity !important;
           }
         }
 
