@@ -128,6 +128,11 @@ const homeIslandStyles = `<style>
     height: 11px;
   }
 
+  .go-up-button,
+  .go-up-button.w--current {
+    border-width: 1px !important;
+  }
+
   .work-hero.case-two {
     background-image: url('/webflow/images/Bonchat_Concentric_Cover-mobile.webp') !important;
   }
