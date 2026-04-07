@@ -174,6 +174,7 @@ function createIntroMotionStyle(
   { x = "0px", y = "28px", scale = 1, delayMs = 0, durationMs }: IntroMotionOptions = {},
 ): CSSProperties {
   return {
+    "--intro-index": index,
     "--intro-x": x,
     "--intro-y": y,
     "--intro-scale": scale.toString(),
@@ -1012,6 +1013,15 @@ export function PortfolioPage() {
           .project-card-caption {
             transition: none;
             clip-path: inset(0 0 0 0);
+          }
+        }
+
+        @media (max-width: 767px) {
+          .portfolio-intro-item {
+            --intro-x: 0px !important;
+            --intro-y: -72px !important;
+            animation-duration: 1760ms !important;
+            animation-delay: calc(var(--intro-index, 0) * 120ms) !important;
           }
         }
 
