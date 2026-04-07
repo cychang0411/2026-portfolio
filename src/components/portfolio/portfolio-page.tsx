@@ -633,7 +633,7 @@ export function PortfolioPage() {
             subtitle={language === "zh" ? "智能硬件" : "Smart Hardware"}
             language={language}
             icon={<Cube size={18} weight="fill" />}
-            href="https://vickyzhang.com/bonfire-os-7-0"
+            href="/work/bonfire-os-7-0"
             className="lg:col-start-3 lg:row-start-2"
             backgroundImageSrc="/portfolio/optimized/bonfire-os7-cover16.jpg"
             backgroundImageAlt="Bonfire OS 7.0 project cover"
@@ -650,7 +650,7 @@ export function PortfolioPage() {
             subtitle={language === "zh" ? "手机应用" : "Mobile App"}
             language={language}
             icon={<DeviceMobile size={18} weight="fill" />}
-            href="https://vickyzhang.com/design-simppl"
+            href="/work/design-simppl"
             className="lg:col-start-4 lg:row-start-2"
             backgroundImageSrc="/portfolio/optimized/simppl-cover2.jpg"
             backgroundImageAlt="Simppl mobile app project cover"
@@ -668,7 +668,7 @@ export function PortfolioPage() {
             subtitle={language === "zh" ? "网页插件" : "Web Plugin"}
             language={language}
             icon={<PaintBrush size={18} weight="fill" />}
-            href="https://vickyzhang.com/design-cartify"
+            href="/work/design-cartify"
             className="lg:col-start-5 lg:row-start-2"
             backgroundImageSrc="/portfolio/optimized/cartify-cover3.jpg"
             backgroundImageAlt="Cartify project cover"

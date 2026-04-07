@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Imported third-party Webflow export assets are served as static files.
+    "public/webflow/**",
   ]),
 ]);
 
