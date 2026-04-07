@@ -17,12 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vicky-chang.com"),
   title: "Vicky Chang | UX/UI Designer",
-  description:
-    "A responsive UX/UI designer portfolio inspired by keynote-grade Bento layouts, featuring selected work, playground experiments, daily frames, and bilingual content.",
+  description: "A UX/UI designer based in Shanghai.",
   openGraph: {
     title: "Vicky Chang | UX/UI Designer",
-    description:
-      "A responsive UX/UI designer portfolio inspired by keynote-grade Bento layouts, featuring selected work, playground experiments, daily frames, and bilingual content.",
+    description: "A UX/UI designer based in Shanghai.",
     url: "https://vicky-chang.com",
     siteName: "Vicky Chang Portfolio",
     images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
@@ -31,8 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Vicky Chang | UX/UI Designer",
-    description:
-      "A responsive UX/UI designer portfolio inspired by keynote-grade Bento layouts, featuring selected work, playground experiments, daily frames, and bilingual content.",
+    description: "A UX/UI designer based in Shanghai.",
     images: ["/twitter-image.png"],
   },
   icons: {
