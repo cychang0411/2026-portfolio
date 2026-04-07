@@ -1002,6 +1002,17 @@ export function PortfolioPage() {
           }
         }
 
+        @keyframes portfolio-card-reveal-mobile {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, var(--intro-y, -72px), 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .portfolio-intro-item {
             opacity: 1;
@@ -1020,7 +1031,9 @@ export function PortfolioPage() {
           .portfolio-intro-item {
             --intro-x: 0px !important;
             --intro-y: -72px !important;
+            animation-name: portfolio-card-reveal-mobile !important;
             animation-duration: 1760ms !important;
+            animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
             animation-delay: calc(var(--intro-index, 0) * 120ms) !important;
           }
         }
