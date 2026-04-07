@@ -28,12 +28,14 @@ import { PhotoCarousel } from "@/components/portfolio/photo-carousel";
 type CardProps = Readonly<{
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
 }>;
 
 type SpotlightCardProps = Readonly<{
   children: ReactNode;
   className?: string;
   spotlightColor?: string;
+  style?: CSSProperties;
 }>;
 
 type SocialButtonProps = Readonly<{
@@ -65,6 +67,16 @@ type ProjectCardProps = Readonly<{
   hideTopAction?: boolean;
   hideText?: boolean;
   revealTextOnHover?: boolean;
+  imageLoading?: "lazy" | "eager";
+  style?: CSSProperties;
+}>;
+
+type IntroMotionOptions = Readonly<{
+  x?: string;
+  y?: string;
+  scale?: number;
+  delayMs?: number;
+  durationMs?: number;
 }>;
 
 type PlaygroundProject = Readonly<{
@@ -157,10 +169,24 @@ function useTypewriter(text: string, speed: number, delay: number) {
   return { typed, finished };
 }
 
-function Card({ children, className = "" }: CardProps) {
+function createIntroMotionStyle(
+  index: number,
+  { x = "0px", y = "28px", scale = 1, delayMs = 0, durationMs }: IntroMotionOptions = {},
+): CSSProperties {
+  return {
+    "--intro-x": x,
+    "--intro-y": y,
+    "--intro-scale": scale.toString(),
+    "--intro-delay": `${index * 72 + delayMs}ms`,
+    ...(durationMs ? { "--intro-duration": `${durationMs}ms` } : {}),
+  } as CSSProperties;
+}
+
+function Card({ children, className = "", style }: CardProps) {
   return (
     <section
       className={`rounded-[32px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.02)] ${className}`}
+      style={style}
     >
       {children}
     </section>
@@ -171,6 +197,7 @@ function SpotlightCard({
   children,
   className = "",
   spotlightColor = "rgba(255, 255, 255, 0.15)",
+  style,
 }: SpotlightCardProps) {
   const handleMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -187,6 +214,7 @@ function SpotlightCard({
       className={`group relative overflow-hidden ${className}`}
       style={
         {
+          ...style,
           "--mouse-x": "50%",
           "--mouse-y": "50%",
           "--spotlight-color": spotlightColor,
@@ -300,12 +328,15 @@ function ProjectCard({
   hideTopAction = false,
   hideText = false,
   revealTextOnHover = false,
+  imageLoading = "lazy",
+  style,
 }: ProjectCardProps) {
   const responsiveHeightClass = hideText ? "min-h-[12rem] md:min-h-[12.5rem] lg:min-h-0" : "";
 
   return (
     <Card
-      className={`group relative flex cursor-pointer flex-col justify-between overflow-hidden bg-white p-5 transition-all duration-500 hover:shadow-[0_12px_40px_rgba(242,84,48,0.08)] ${responsiveHeightClass} ${className}`}
+      className={`portfolio-intro-item group relative flex cursor-pointer flex-col justify-between overflow-hidden bg-white p-5 transition-all duration-500 hover:shadow-[0_12px_40px_rgba(242,84,48,0.08)] ${responsiveHeightClass} ${className}`}
+      style={style}
     >
       <a
         href={href}
@@ -322,7 +353,7 @@ function ProjectCard({
                 alt={backgroundImageAlt}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 24vw"
-                loading="lazy"
+                loading={imageLoading}
                 quality={72}
                 className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.08]"
               />
@@ -459,9 +490,10 @@ export function PortfolioPage() {
   return (
     <>
       <main className="flex min-h-[100dvh] items-start justify-center bg-[#FDF4F0] px-4 py-10 text-[#f93b38] selection:bg-[#f93b38] selection:text-white">
-        <div className="grid min-h-[calc(100dvh-80px)] w-full max-w-[1400px] grid-cols-1 gap-5 md:grid-cols-2 lg:h-[calc(100dvh-80px)] lg:min-h-0 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,0.82fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[1fr_1fr_1fr] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="relative isolate grid min-h-[calc(100dvh-80px)] w-full max-w-[1400px] grid-cols-1 gap-5 md:grid-cols-2 lg:h-[calc(100dvh-80px)] lg:min-h-0 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,0.82fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[1fr_1fr_1fr] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <SpotlightCard
-            className="col-span-1 row-span-1 min-w-0 rounded-[32px] bg-gradient-to-tr from-[#f93b38] to-[#ffd37c] p-6 text-white shadow-[0_8px_30px_rgba(249,59,56,0.2)] md:col-span-2 md:p-7 lg:col-span-2 lg:col-start-1 lg:h-full lg:row-span-3 lg:row-start-1 lg:p-8"
+            className="portfolio-intro-item col-span-1 row-span-1 min-w-0 rounded-[32px] bg-gradient-to-tr from-[#f93b38] to-[#ffd37c] p-6 text-white shadow-[0_8px_30px_rgba(249,59,56,0.2)] md:col-span-2 md:p-7 lg:col-span-2 lg:col-start-1 lg:h-full lg:row-span-3 lg:row-start-1 lg:p-8"
+            style={createIntroMotionStyle(0, { x: "-96px", y: "0px", delayMs: 160 })}
           >
             <div className="absolute -right-20 -top-20 size-96 rounded-full bg-white/5 blur-3xl transition-colors duration-700 group-hover:bg-white/10" />
 
@@ -528,7 +560,15 @@ export function PortfolioPage() {
             />
           </SpotlightCard>
 
-          <Card className="group relative col-span-1 row-span-1 flex flex-row items-center gap-8 overflow-hidden p-6 transition-all duration-500 hover:shadow-[0_12px_40px_rgba(249,59,56,0.08)] lg:col-span-2 lg:col-start-3 lg:row-start-1">
+          <Card
+            className="portfolio-intro-item group relative col-span-1 row-span-1 flex flex-row items-center gap-8 overflow-hidden p-6 transition-all duration-500 hover:shadow-[0_12px_40px_rgba(249,59,56,0.08)] lg:col-span-2 lg:col-start-3 lg:row-start-1"
+            style={createIntroMotionStyle(1, {
+              x: "0px",
+              y: "-58px",
+              delayMs: 28,
+              durationMs: 2280,
+            })}
+          >
             <div className="flex flex-none flex-col justify-between self-stretch">
 	              <MagicWand
 	                size={34}
@@ -555,7 +595,15 @@ export function PortfolioPage() {
             </div>
           </Card>
 
-          <SpotlightCard className="col-span-1 row-span-1 min-h-[11rem] rounded-[32px] bg-gradient-to-tr from-[#f93b38] via-[#ff6b35] to-[#ffd37c] p-6 text-white shadow-[0_8px_30px_rgba(249,59,56,0.15)] transition-transform duration-300 hover:scale-[1.02] md:min-h-[12.5rem] lg:col-start-5 lg:row-start-1 lg:min-h-0">
+          <SpotlightCard
+            className="portfolio-intro-item col-span-1 row-span-1 min-h-[11rem] rounded-[32px] bg-gradient-to-tr from-[#f93b38] via-[#ff6b35] to-[#ffd37c] p-6 text-white shadow-[0_8px_30px_rgba(249,59,56,0.15)] transition-transform duration-300 hover:scale-[1.02] md:min-h-[12.5rem] lg:col-start-5 lg:row-start-1 lg:min-h-0"
+            style={createIntroMotionStyle(2, {
+              x: "0px",
+              y: "-58px",
+              delayMs: 92,
+              durationMs: 2360,
+            })}
+          >
             <a
               href={content.resume.href}
               target="_blank"
@@ -592,6 +640,8 @@ export function PortfolioPage() {
             hideTopAction
             hideText
             revealTextOnHover
+            imageLoading="eager"
+            style={createIntroMotionStyle(3, { x: "260px", y: "0px", delayMs: 120 })}
           />
           <ProjectCard
             index="Project 02"
@@ -607,6 +657,8 @@ export function PortfolioPage() {
             hideTopAction
             hideText
             revealTextOnHover
+            imageLoading="eager"
+            style={createIntroMotionStyle(4, { x: "260px", y: "0px", delayMs: 210 })}
           />
 
           <ProjectCard
@@ -623,9 +675,14 @@ export function PortfolioPage() {
             hideTopAction
             hideText
             revealTextOnHover
+            imageLoading="eager"
+            style={createIntroMotionStyle(5, { x: "260px", y: "0px", delayMs: 300 })}
           />
 
-          <Card className="group relative min-h-[12rem] overflow-hidden md:min-h-[13.5rem] lg:col-start-4 lg:row-start-3 lg:min-h-0">
+          <Card
+            className="portfolio-intro-item group relative min-h-[12rem] overflow-hidden md:min-h-[13.5rem] lg:col-start-4 lg:row-start-3 lg:min-h-0"
+            style={createIntroMotionStyle(6, { x: "0px", y: "56px", delayMs: 220 })}
+          >
             <div className="pointer-events-none absolute left-5 top-5 z-20 inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 p-2.5 text-white backdrop-blur-sm">
               <Camera size={14} weight="fill" />
             </div>
@@ -639,7 +696,10 @@ export function PortfolioPage() {
             />
           </Card>
 
-          <Card className="group relative min-h-[12rem] overflow-hidden md:min-h-[13.5rem] lg:col-start-5 lg:row-start-3 lg:min-h-0">
+          <Card
+            className="portfolio-intro-item group relative min-h-[12rem] overflow-hidden md:min-h-[13.5rem] lg:col-start-5 lg:row-start-3 lg:min-h-0"
+            style={createIntroMotionStyle(7, { x: "0px", y: "56px", delayMs: 260 })}
+          >
             <div className="pointer-events-none absolute left-5 top-5 z-20 inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 p-2.5 text-white backdrop-blur-sm">
               <Cat size={14} weight="fill" />
             </div>
@@ -654,7 +714,10 @@ export function PortfolioPage() {
           </Card>
 
           <div className="col-span-1 row-span-1 flex flex-col gap-5 md:min-h-[22rem] lg:col-start-3 lg:row-start-3 lg:min-h-0">
-            <Card className="flex min-h-[11rem] flex-1 flex-col items-center justify-center border border-transparent p-3 text-center transition-colors duration-300 hover:border-[#F25430]/10 md:min-h-0">
+            <Card
+              className="portfolio-intro-item flex min-h-[11rem] flex-1 flex-col items-center justify-center border border-transparent p-3 text-center transition-colors duration-300 hover:border-[#F25430]/10 md:min-h-0"
+              style={createIntroMotionStyle(8, { x: "0px", y: "56px", delayMs: 310 })}
+            >
               <span
                 className={`mb-1 block font-bold uppercase tracking-[0.2em] text-[#F25430]/55 ${
                   language === "zh" ? "text-sm" : "text-xs"
@@ -694,7 +757,10 @@ export function PortfolioPage() {
               </div>
             </Card>
 
-            <Card className="flex min-h-[11rem] flex-1 flex-col items-center justify-center overflow-hidden border border-transparent p-3 text-center transition-colors duration-300 hover:border-[#F25430]/10 md:min-h-0">
+            <Card
+              className="portfolio-intro-item flex min-h-[11rem] flex-1 flex-col items-center justify-center overflow-hidden border border-transparent p-3 text-center transition-colors duration-300 hover:border-[#F25430]/10 md:min-h-0"
+              style={createIntroMotionStyle(9, { x: "0px", y: "56px", delayMs: 350 })}
+            >
               <span
                 className={`mb-1 block font-bold uppercase tracking-[0.2em] text-[#F25430]/55 ${
                   language === "zh" ? "text-sm" : "text-xs"
@@ -842,6 +908,17 @@ export function PortfolioPage() {
           -webkit-text-fill-color: transparent;
         }
 
+        .portfolio-intro-item {
+          opacity: 0;
+          transform: translate3d(var(--intro-x, 0px), var(--intro-y, 28px), 0)
+            scale(var(--intro-scale, 1));
+          transform-origin: center;
+          animation: portfolio-card-reveal var(--intro-duration, 1860ms)
+            cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation-delay: var(--intro-delay, 0ms);
+          will-change: transform, opacity;
+        }
+
         .project-card-caption {
           position: absolute;
           inset: 0;
@@ -909,7 +986,29 @@ export function PortfolioPage() {
           }
         }
 
+        @keyframes portfolio-card-reveal {
+          0% {
+            opacity: 0;
+            transform: translate3d(var(--intro-x, 0px), var(--intro-y, 28px), 0)
+              scale(var(--intro-scale, 1));
+          }
+          65% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
+          .portfolio-intro-item {
+            opacity: 1;
+            transform: none;
+            animation: none;
+            will-change: auto;
+          }
+
           .project-card-caption {
             transition: none;
             clip-path: inset(0 0 0 0);
