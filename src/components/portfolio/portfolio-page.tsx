@@ -341,8 +341,6 @@ function ProjectCard({
     >
       <a
         href={href}
-        target="_blank"
-        rel="noreferrer"
         aria-label={title}
         className="flex h-full w-full flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F25430]/80 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
       >
