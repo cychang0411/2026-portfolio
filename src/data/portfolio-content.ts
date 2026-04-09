@@ -260,7 +260,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     ],
     resume: {
       label: "下載履歷",
-      href: "https://drive.google.com/file/d/1G9on9D9zSpRu1vza67IQX7g9DH3HwsEU/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1Gscx49yF2wIkf0wi8eHbXlfJ1n7aKBlo/view?usp=sharing",
     },
     contact: {
       title: "一起做更有質感的產品",
@@ -383,7 +383,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     ],
     resume: {
       label: "Download resume",
-      href: "https://drive.google.com/file/d/1bHis9j7BDvVEYxCi2XHC1VmhGDpTqShL/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1RaxKxFtIkyEiY2ks0p7aifVsE6xAvTlg/view?usp=sharing",
     },
     contact: {
       title: "Let’s shape a more thoughtful product",
