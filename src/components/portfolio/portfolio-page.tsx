@@ -403,11 +403,20 @@ function ProjectCard({
 
 export function PortfolioPage() {
   const [language, setLanguage] = useState<"en" | "zh">("en");
-  const [shanghaiTime, setShanghaiTime] = useState("08:42");
+  const [introReady, setIntroReady] = useState(false);
+  const [shanghaiTime, setShanghaiTime] = useState<string | null>(null);
   const [activePlaygroundProjectId, setActivePlaygroundProjectId] = useState<string | null>(null);
   const content = portfolioContent[language];
   const activePlaygroundProject =
     playgroundProjects.find((project) => project.id === activePlaygroundProjectId) ?? null;
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setIntroReady(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -488,7 +497,10 @@ export function PortfolioPage() {
 
   return (
     <>
-      <main className="flex min-h-[100dvh] items-start justify-center bg-[#FDF4F0] px-4 py-10 text-[#f93b38] selection:bg-[#f93b38] selection:text-white">
+      <main
+        data-intro-ready={introReady ? "true" : "false"}
+        className="flex min-h-[100dvh] items-start justify-center bg-[#FDF4F0] px-4 py-10 text-[#f93b38] selection:bg-[#f93b38] selection:text-white"
+      >
         <div className="relative isolate grid min-h-[calc(100dvh-80px)] w-full max-w-[1400px] grid-cols-1 gap-5 md:grid-cols-2 lg:h-[calc(100dvh-80px)] lg:min-h-0 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,0.82fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[1fr_1fr_1fr] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.92fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
           <SpotlightCard
             className="portfolio-intro-item col-span-1 row-span-1 min-w-0 rounded-[32px] bg-gradient-to-tr from-[#f93b38] to-[#ffd37c] p-6 text-white shadow-[0_8px_30px_rgba(249,59,56,0.2)] md:col-span-2 md:p-7 lg:col-span-2 lg:col-start-1 lg:h-full lg:row-span-3 lg:row-start-1 lg:p-8"
@@ -767,7 +779,9 @@ export function PortfolioPage() {
               >
                 {language === "zh" ? "上海" : "Shanghai"}
               </span>
-              <div className="gradient-static text-3xl font-extrabold">{shanghaiTime}</div>
+              <div suppressHydrationWarning className="gradient-static text-3xl font-extrabold">
+                {shanghaiTime ?? "--:--"}
+              </div>
             </Card>
           </div>
         </div>
@@ -864,172 +878,6 @@ export function PortfolioPage() {
           </div>
         </div>
       ) : null}
-
-      <style jsx global>{`
-        .typing-text {
-          display: inline;
-        }
-
-        .typing-cursor {
-          display: inline-block;
-          width: 3px;
-          height: 1em;
-          margin-left: 2px;
-          vertical-align: text-bottom;
-          background: currentColor;
-          animation: blink 1s step-end infinite;
-        }
-
-        .typing-finished .typing-cursor {
-          opacity: 0;
-          animation: none;
-        }
-
-        .gradient-time-text {
-          background: linear-gradient(to right, #f93b38, #ff6b35, #ffd37c, #f93b38);
-          background-size: 300% 100%;
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-          -webkit-text-fill-color: transparent;
-          animation: gradient-flow 6s linear infinite;
-        }
-
-        .gradient-time-text:hover {
-          animation-play-state: paused;
-        }
-
-        .gradient-static {
-          background: linear-gradient(to right, #f93b38, #ff6b35, #ffd37c);
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .portfolio-intro-item {
-          opacity: 0;
-          transform: translate3d(var(--intro-x, 0px), var(--intro-y, 28px), 0)
-            scale(var(--intro-scale, 1));
-          transform-origin: center;
-          animation: portfolio-card-reveal var(--intro-duration, 1860ms)
-            cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          animation-delay: var(--intro-delay, 0ms);
-          will-change: transform, opacity;
-        }
-
-        .project-card-caption {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          padding: 1.35rem;
-          margin: -1px;
-          gap: 0.32rem;
-          background: rgba(10, 12, 18, 0.62);
-          clip-path: inset(0 var(--project-caption-reveal, 100%) 0 0);
-          pointer-events: none;
-          transition: clip-path 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .project-card-caption-subtitle {
-          display: block;
-          margin-bottom: 0;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
-          line-height: 1;
-          text-transform: uppercase;
-          color: rgba(252, 251, 248, 0.72);
-        }
-
-        .project-card-caption-subtitle--zh {
-          font-size: 12px;
-          letter-spacing: 0.08em;
-          font-weight: 600;
-          text-transform: none;
-        }
-
-        .project-card-caption-title {
-          display: block;
-          font-size: clamp(1rem, 0.92rem + 0.45vw, 1.35rem);
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          line-height: 1.02;
-          color: #fcfbf8;
-          text-wrap: balance;
-        }
-
-        .group:hover .project-card-caption,
-        .group:focus-within .project-card-caption {
-          --project-caption-reveal: 0%;
-        }
-
-        @keyframes blink {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-        }
-
-        @keyframes gradient-flow {
-          0% {
-            background-position: 0% 50%;
-          }
-          100% {
-            background-position: 300% 50%;
-          }
-        }
-
-        @keyframes portfolio-card-reveal {
-          0% {
-            opacity: 0;
-            transform: translate3d(var(--intro-x, 0px), var(--intro-y, 28px), 0)
-              scale(var(--intro-scale, 1));
-          }
-          65% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .portfolio-intro-item {
-            opacity: 1;
-            transform: none;
-            animation: none;
-            will-change: auto;
-          }
-
-          .project-card-caption {
-            transition: none;
-            clip-path: inset(0 0 0 0);
-          }
-        }
-
-        @media (max-width: 767px) {
-          .portfolio-intro-item {
-            --intro-x: 0px !important;
-            --intro-y: -72px !important;
-            animation-duration: 1760ms !important;
-            animation-delay: calc(var(--intro-index, 0) * 120ms) !important;
-          }
-        }
-
-        @media (hover: none), (pointer: coarse) {
-          .project-card-caption {
-            --project-caption-reveal: 0%;
-            background: linear-gradient(to top, rgba(10, 12, 18, 0.78), rgba(10, 12, 18, 0.16));
-          }
-        }
-      `}</style>
     </>
   );
 }
