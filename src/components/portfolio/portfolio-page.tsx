@@ -21,7 +21,6 @@ import {
   ThreadsLogo,
   X,
 } from "@phosphor-icons/react";
-import { MapPinned, Speech } from "lucide-react";
 import { portfolioContent } from "@/data/portfolio-content";
 import { PhotoCarousel } from "@/components/portfolio/photo-carousel";
 
@@ -49,7 +48,6 @@ type SocialButtonProps = Readonly<{
 type MiniProjectProps = Readonly<{
   title: string;
   description: string;
-  logo: "vibelingo" | "pinsight";
   onClick: () => void;
 }>;
 
@@ -83,7 +81,7 @@ type PlaygroundProject = Readonly<{
   id: string;
   index: string;
   title: string;
-  logo: "vibelingo" | "pinsight";
+  logo: "vibelingo" | "pinsight" | "tinyrituals";
   subtitle: {
     en: string;
     zh: string;
@@ -107,7 +105,7 @@ const playgroundProjects: PlaygroundProject[] = [
     title: "VibeLingo",
     logo: "vibelingo",
     subtitle: {
-      en: "Language Learning",
+      en: "Language",
       zh: "语言学习",
     },
     overview: {
@@ -127,7 +125,7 @@ const playgroundProjects: PlaygroundProject[] = [
     title: "PinSight",
     logo: "pinsight",
     subtitle: {
-      en: "Trip Planner",
+      en: "Trip",
       zh: "旅游规划",
     },
     overview: {
@@ -140,6 +138,26 @@ const playgroundProjects: PlaygroundProject[] = [
     videoSrc: "/playground/pinsight.mp4",
     videoType: "video/mp4",
     videoHint: "已接入附件影片 /public/playground/pinsight.mp4。",
+  },
+  {
+    id: "tiny-rituals",
+    index: "03",
+    title: "Tiny Rituals",
+    logo: "tinyrituals",
+    subtitle: {
+      en: "Wellness",
+      zh: "自我照护与健康",
+    },
+    overview: {
+      en: "A self-care app where each daily habit becomes one puzzle piece of a more beautiful self.",
+      zh: "一款自我照护应用，让每天的微小习惯都成为拼出更美好自己的其中一块拼图。",
+    },
+    tools: ["v0", "Codex", "Claude"],
+    posterSrc: "/playground/posters/tiny-rituals-first-frame.jpg",
+    posterAlt: "Tiny Rituals poster",
+    videoSrc: "/playground/tiny-rituals.mp4",
+    videoType: "video/mp4",
+    videoHint: "已接入附件影片 /public/playground/tiny-rituals.mp4。",
   },
 ];
 
@@ -281,35 +299,21 @@ function SocialButton({
   );
 }
 
-function MiniProject({ title, description, logo, onClick }: MiniProjectProps) {
-  const isVibeLingo = logo === "vibelingo";
-
+function MiniProject({ title, description, onClick }: MiniProjectProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="group/item flex w-full min-w-0 flex-1 flex-col justify-center rounded-[20px] bg-[#FEF0EC] px-5 py-3.5 text-left transition-all duration-300 hover:bg-[#F25430] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F25430]/75 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+      className="group/item flex h-full w-full min-w-0 flex-col items-center justify-center rounded-[20px] bg-[#FEF0EC] px-5 py-4 text-center transition-all duration-300 hover:bg-[#F25430] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F25430]/75 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
       aria-label={`Open ${title} preview`}
     >
-      <div className="flex items-center gap-3">
-        <div
-          className={`flex size-10 shrink-0 items-center justify-center transition-colors duration-300 ${
-            isVibeLingo
-              ? "rounded-[12px] bg-[#e72855] text-white group-hover/item:bg-white/16 group-hover/item:text-white"
-              : "rounded-[12px] bg-[#0a0a0a] text-white group-hover/item:bg-white/16 group-hover/item:text-white"
-          }`}
-        >
-          {isVibeLingo ? <Speech className="size-5" strokeWidth={2.2} /> : <MapPinned className="size-5" strokeWidth={1.8} />}
-        </div>
-
-        <div className="min-w-0">
-          <h3 className="text-base font-extrabold text-[#F25430] group-hover/item:text-white">
-            {title}
-          </h3>
-          <p className="mt-0.5 text-sm text-[#F25430]/70 group-hover/item:text-white/70">
-            {description}
-          </p>
-        </div>
+      <div className="min-w-0">
+        <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#F25430]/55 group-hover/item:text-white/70 md:text-[11px]">
+          {description}
+        </p>
+        <h3 className="text-[15px] font-extrabold text-[#F25430] group-hover/item:text-white md:text-base">
+          {title}
+        </h3>
       </div>
     </button>
   );
@@ -409,6 +413,13 @@ export function PortfolioPage() {
   const content = portfolioContent[language];
   const activePlaygroundProject =
     playgroundProjects.find((project) => project.id === activePlaygroundProjectId) ?? null;
+  const aiLabsCardProjects = [
+    "tiny-rituals",
+    "motion-prompt-playground",
+    "ai-bento-portfolio-lab",
+  ]
+    .map((id) => playgroundProjects.find((project) => project.id === id))
+    .filter((project): project is PlaygroundProject => Boolean(project));
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -572,7 +583,7 @@ export function PortfolioPage() {
           </SpotlightCard>
 
           <Card
-            className="portfolio-intro-item group relative col-span-1 row-span-1 flex flex-row items-center gap-8 overflow-hidden p-6 transition-all duration-500 hover:shadow-[0_12px_40px_rgba(249,59,56,0.08)] lg:col-span-2 lg:col-start-3 lg:row-start-1"
+            className="portfolio-intro-item group relative col-span-1 row-span-1 flex flex-row items-stretch gap-4 overflow-hidden p-5 transition-all duration-500 hover:shadow-[0_12px_40px_rgba(249,59,56,0.08)] md:gap-5 md:p-6 lg:col-span-2 lg:col-start-3 lg:row-start-1 lg:gap-8"
             style={createIntroMotionStyle(1, {
               x: "0px",
               y: "-58px",
@@ -580,7 +591,7 @@ export function PortfolioPage() {
               durationMs: 2280,
             })}
           >
-            <div className="flex flex-none flex-col justify-between self-stretch">
+            <div className="flex w-[4.75rem] shrink-0 flex-col justify-between self-stretch md:w-[5.25rem] lg:w-auto">
 	              <MagicWand
 	                size={34}
 	                weight="fill"
@@ -593,16 +604,21 @@ export function PortfolioPage() {
 	              </h2>
             </div>
 
-            <div className="flex w-full min-w-0 flex-1 flex-col gap-4 self-stretch lg:ml-auto lg:max-w-[16.25rem]">
-              {playgroundProjects.map((project) => (
-                <MiniProject
-                  key={project.id}
-                  title={project.title}
-                  description={project.subtitle[language]}
-                  logo={project.logo}
-                  onClick={() => setActivePlaygroundProjectId(project.id)}
-                />
+            <div className="grid h-full min-h-0 w-full min-w-0 flex-1 grid-cols-2 grid-rows-[1fr_1fr] gap-4 self-stretch lg:ml-auto lg:max-w-[20rem]">
+              {aiLabsCardProjects.map((project) => (
+                <div key={project.id} className="min-h-0">
+                  <MiniProject
+                    title={project.title}
+                    description={project.subtitle[language]}
+                    onClick={() => setActivePlaygroundProjectId(project.id)}
+                  />
+                </div>
               ))}
+              <div className="flex min-h-0 items-center justify-center rounded-[20px] bg-[#FFF3EC] px-5 py-4 text-center">
+                <div>
+                  <p className="text-sm font-medium text-[#EE946B]">Coming soon</p>
+                </div>
+              </div>
             </div>
           </Card>
 
