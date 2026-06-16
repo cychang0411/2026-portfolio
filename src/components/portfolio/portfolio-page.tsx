@@ -86,6 +86,10 @@ type PlaygroundProject = Readonly<{
     en: string;
     zh: string;
   };
+  modalSubtitle: {
+    en: string;
+    zh: string;
+  };
   overview: {
     en: string;
     zh: string;
@@ -108,6 +112,10 @@ const playgroundProjects: PlaygroundProject[] = [
       en: "Language",
       zh: "语言学习",
     },
+    modalSubtitle: {
+      en: "Language Learning",
+      zh: "语言学习",
+    },
     overview: {
       en: "Master languages through bilingual videos and audio-enhanced reading.",
       zh: "透过双语影片与语音强化阅读来精通语言。",
@@ -128,6 +136,10 @@ const playgroundProjects: PlaygroundProject[] = [
       en: "Trip",
       zh: "旅游规划",
     },
+    modalSubtitle: {
+      en: "Trip Planner",
+      zh: "旅游规划",
+    },
     overview: {
       en: "Transform social media content into ready-to-go itineraries.",
       zh: "将社群内容转化为随时可出发的旅游行程。",
@@ -146,6 +158,10 @@ const playgroundProjects: PlaygroundProject[] = [
     logo: "tinyrituals",
     subtitle: {
       en: "Wellness",
+      zh: "自我照护与健康",
+    },
+    modalSubtitle: {
+      en: "Self-care & Wellness",
       zh: "自我照护与健康",
     },
     overview: {
@@ -861,7 +877,7 @@ export function PortfolioPage() {
                         {activePlaygroundProject.title}
                       </h2>
                       <p className="max-w-[26ch] text-sm leading-7 text-white/62">
-                        {activePlaygroundProject.subtitle[language]}
+                        {activePlaygroundProject.modalSubtitle[language]}
                       </p>
                     </div>
                   </div>
