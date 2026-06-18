@@ -837,6 +837,11 @@ export function PortfolioPage() {
                   <video
                     key={activePlaygroundProject.videoSrc}
                     className="h-full w-full object-cover"
+                    style={
+                      activePlaygroundProject.id === "tiny-rituals"
+                        ? { objectPosition: "center -52px" }
+                        : undefined
+                    }
                     autoPlay
                     controls
                     muted
