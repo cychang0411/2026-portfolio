@@ -630,13 +630,17 @@ export function PortfolioPage() {
                   />
                 </div>
               ))}
-              <div className="flex min-h-0 items-center justify-center rounded-[20px] bg-[#FFF3EC] px-5 py-4 text-center">
+              <div className="group/loopod relative flex min-h-0 items-center justify-center overflow-hidden rounded-[20px] bg-[#FFF3EC] px-5 py-4 text-center">
                 <div>
                   <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#F25430]/55 md:text-[11px]">
-                    Utilities
+                    {language === "zh" ? "工具" : "Utilities"}
                   </p>
                   <p className="text-[15px] font-extrabold text-[#F25430] md:text-base">Loopod</p>
-                  <p className="mt-1 text-[9px] font-medium text-[#EE946B] md:text-[10px]">Coming soon</p>
+                </div>
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 opacity-0 transition-opacity duration-300 group-hover/loopod:opacity-100">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white md:text-[11px]">
+                    {language === "zh" ? "即將上線" : "Coming soon"}
+                  </p>
                 </div>
               </div>
             </div>
