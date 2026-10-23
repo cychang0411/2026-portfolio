@@ -639,7 +639,7 @@ export function PortfolioPage() {
                 </div>
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 opacity-0 transition-opacity duration-300 group-hover/loopod:opacity-100">
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white md:text-[11px]">
-                    {language === "zh" ? "即將上線" : "Coming soon"}
+                    {language === "zh" ? "即将上线" : "Coming soon"}
                   </p>
                 </div>
               </div>
