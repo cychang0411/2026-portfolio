@@ -632,7 +632,11 @@ export function PortfolioPage() {
               ))}
               <div className="flex min-h-0 items-center justify-center rounded-[20px] bg-[#FFF3EC] px-5 py-4 text-center">
                 <div>
-                  <p className="text-sm font-medium text-[#EE946B]">Coming soon</p>
+                  <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#F25430]/55 md:text-[11px]">
+                    Utilities
+                  </p>
+                  <p className="text-[15px] font-extrabold text-[#F25430] md:text-base">Loopod</p>
+                  <p className="mt-1 text-[9px] font-medium text-[#EE946B] md:text-[10px]">Coming soon</p>
                 </div>
               </div>
             </div>

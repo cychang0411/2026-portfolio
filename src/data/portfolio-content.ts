@@ -260,7 +260,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     ],
     resume: {
       label: "下載履歷",
-      href: "https://drive.google.com/file/d/1Gscx49yF2wIkf0wi8eHbXlfJ1n7aKBlo/view?usp=sharing",
+      href: "/resume/vicky-chang-resume-zh.pdf",
     },
     contact: {
       title: "一起做更有質感的產品",
@@ -383,7 +383,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     ],
     resume: {
       label: "Download resume",
-      href: "https://drive.google.com/file/d/1RaxKxFtIkyEiY2ks0p7aifVsE6xAvTlg/view?usp=sharing",
+      href: "/resume/vicky-chang-resume-en.pdf",
     },
     contact: {
       title: "Let’s shape a more thoughtful product",
