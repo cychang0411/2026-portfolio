@@ -81,7 +81,7 @@ type PlaygroundProject = Readonly<{
   id: string;
   index: string;
   title: string;
-  logo: "vibelingo" | "pinsight" | "tinyrituals";
+  logo: "vibelingo" | "pinsight" | "tinyrituals" | "loopod";
   subtitle: {
     en: string;
     zh: string;
@@ -103,6 +103,30 @@ type PlaygroundProject = Readonly<{
 }>;
 
 const playgroundProjects: PlaygroundProject[] = [
+  {
+    id: "loopod",
+    index: "04",
+    title: "Loopod",
+    logo: "loopod",
+    subtitle: {
+      en: "Language",
+      zh: "语言",
+    },
+    modalSubtitle: {
+      en: "Language Learning",
+      zh: "语言学习",
+    },
+    overview: {
+      en: "An iPod-inspired shadowing app for commutes and walks: bring your own content, turn the wheel, and repeat after every sentence, right from the lock screen.",
+      zh: "一款受 iPod 启发的跟读应用，适合通勤和散步：导入自己的内容、转动滚轮，并在锁屏界面逐句跟读。",
+    },
+    tools: ["Claude", "Xcode", "SwiftUI"],
+    posterSrc: "/playground/posters/loopod-first-frame.jpg",
+    posterAlt: "Loopod poster",
+    videoSrc: "/playground/loopod.mp4",
+    videoType: "video/mp4",
+    videoHint: "已接入附件影片 /public/playground/loopod.mp4。",
+  },
   {
     id: "ai-bento-portfolio-lab",
     index: "01",
@@ -430,6 +454,7 @@ export function PortfolioPage() {
   const activePlaygroundProject =
     playgroundProjects.find((project) => project.id === activePlaygroundProjectId) ?? null;
   const aiLabsCardProjects = [
+    "loopod",
     "tiny-rituals",
     "motion-prompt-playground",
     "ai-bento-portfolio-lab",
@@ -630,19 +655,6 @@ export function PortfolioPage() {
                   />
                 </div>
               ))}
-              <div className="group/loopod relative flex min-h-0 items-center justify-center overflow-hidden rounded-[20px] bg-[#FFF3EC] px-5 py-4 text-center">
-                <div>
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#F25430]/55 md:text-[11px]">
-                    {language === "zh" ? "工具" : "Utilities"}
-                  </p>
-                  <p className="text-[15px] font-extrabold text-[#F25430] md:text-base">Loopod</p>
-                </div>
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/55 opacity-0 transition-opacity duration-300 group-hover/loopod:opacity-100">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white md:text-[11px]">
-                    {language === "zh" ? "即将上线" : "Coming soon"}
-                  </p>
-                </div>
-              </div>
             </div>
           </Card>
 
