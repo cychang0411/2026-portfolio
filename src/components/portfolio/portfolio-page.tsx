@@ -110,7 +110,7 @@ const playgroundProjects: PlaygroundProject[] = [
     logo: "loopod",
     subtitle: {
       en: "Language",
-      zh: "语言",
+      zh: "语言学习",
     },
     modalSubtitle: {
       en: "Language Learning",
